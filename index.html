@@ -1,364 +1,229 @@
-<!doctype html>
-<html lang="vi" class="dark">
+<!DOCTYPE html>
+<html lang="vi">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Trang cá nhân • Your Name</title>
-  <meta name="description" content="Hồ sơ cá nhân của Your Name – giới thiệu, dự án, kỹ năng và liên hệ." />
-
-  <!-- Open Graph / Twitter -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Your Name – Trang cá nhân" />
-  <meta property="og:description" content="Giới thiệu, dự án, kỹ năng và liên hệ." />
-  <meta property="og:image" content="https://raw.githubusercontent.com/<your-username>/<your-repo>/main/assets/og-cover.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <!-- PWA-ish favicons (optional) -->
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="assets/icon-180.png" />
-  <meta name="theme-color" content="#0ea5e9" />
-
+  <title>Digital Shop · Sản phẩm số chất lượng</title>
+  <meta name="description" content="Cửa hàng sản phẩm số – giao diện hiện đại, đơn giản, tối ưu chuyển đổi. Chạy trên GitHub Pages." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ===== CSS biến & reset tối ưu hoá ===== */
-    :root {
-      --bg: #0b1220;
-      --bg-soft: #0f172a;
-      --card: #11192c;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --brand: #0ea5e9; /* sky-500 */
-      --brand-2: #22d3ee; /* cyan-400 */
-      --ring: rgba(14,165,233,.35);
-      --shadow: 0 10px 30px rgba(2,8,23,.45);
+    :root{
+      --bg:#0b0b0c; /* tối kiểu Taobao xịn */
+      --card:#121214;
+      --muted:#8b8b91;
+      --text:#f2f2f3;
+      --brand:#ff5a00; /* accent kiểu Taobao */
+      --brand-2:#ff8640;
+      --success:#22c55e;
+      --radius:18px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --max:1200px;
     }
-    html.light { --bg:#f8fafc; --bg-soft:#ffffff; --card:#ffffff; --text:#0b1220; --muted:#334155; --ring:rgba(14,165,233,.25); }
-html.dark { --bg:#0b1220; --bg-soft:#0f172a; --card:#11192c; --text:#e5e7eb; --muted:#9ca3af; --ring:rgba(14,165,233,.35); }
-    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max);margin:auto;padding:0 16px}
 
-    * { box-sizing: border-box }
-    html, body { height: 100% }
-    body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color: var(--text);
-      background: radial-gradient(1200px 800px at 80% -10%, rgba(14,165,233,.25), transparent 60%),
-                  radial-gradient(900px 600px at 0% 10%, rgba(34,211,238,.18), transparent 55%),
-                  var(--bg);
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-      scroll-behavior: smooth;
-    }
-    a { color: inherit; text-decoration: none }
-    img { max-width: 100%; display: block }
-    .container { width: min(1100px, 92%); margin: 0 auto }
+    /* HEADER */
+    header{position:sticky;top:0;z-index:50;background:linear-gradient(0deg, rgba(11,11,12,0.7), rgba(11,11,12,0.9));backdrop-filter:saturate(1.2) blur(6px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .head{display:grid;grid-template-columns:180px 1fr 200px;gap:12px;align-items:center;padding:14px 0}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.4px}
+    .logo-badge{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;color:#fff;font-weight:900}
+    .search{position:relative}
+    .search input{width:100%;padding:12px 14px 12px 38px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:#0f0f11;color:var(--text);outline:none}
+    .search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);opacity:.6}
+    .cta-bar{display:flex;justify-content:flex-end;gap:10px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:#131316;color:var(--text)}
+    .btn.brand{background:linear-gradient(135deg,var(--brand),var(--brand-2));border:none;color:#fff;font-weight:700;box-shadow:0 6px 16px rgba(255,90,0,.35)}
 
-    /* ===== Header / Nav ===== */
-    header {
-      position: sticky; top: 0; z-index: 50;
-      backdrop-filter: saturate(120%) blur(10px);
-      background: color-mix(in oklab, var(--bg-soft), transparent 18%);
-      border-bottom: 1px solid color-mix(in oklab, var(--text), transparent 92%);
-    }
-    .nav { display: flex; align-items: center; justify-content: space-between; padding: .75rem 0 }
-    .brand { display: flex; align-items: center; gap: .6rem; font-weight: 700 }
-    .brand .dot {
-      width: 10px; height: 10px; border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, var(--brand-2), var(--brand));
-      box-shadow: 0 0 0 6px var(--ring);
-    }
-    .nav a.link { opacity: .9; padding: .5rem .75rem; border-radius: 10px }
-    .nav a.link:hover { background: color-mix(in oklab, var(--text), transparent 93%) }
-    .actions { display:flex; gap:.5rem; align-items:center }
+    /* HERO */
+    .hero{padding:26px 0 10px}
+    .banner{position:relative;border-radius:20px;overflow:hidden;background:radial-gradient(1200px 400px at 10% 0%, rgba(255,90,0,.12), transparent),linear-gradient(180deg,#0e0e10, #0b0b0c)}
+    .banner-inner{display:grid;grid-template-columns:1.2fr .8fr;gap:10px;align-items:center;padding:28px}
+    .banner h1{margin:0;font-size:28px;line-height:1.2}
+    .sub{opacity:.75;margin-top:6px}
+    .badges{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+    .pill{padding:6px 10px;border:1px solid rgba(255,255,255,.08);border-radius:999px;font-size:12px;opacity:.9}
 
-    .btn {
-      display:inline-flex; align-items:center; gap:.5rem; border:1px solid color-mix(in oklab, var(--text), transparent 85%);
-      background: linear-gradient(to bottom right, color-mix(in oklab, var(--brand), transparent 90%), transparent 60%);
-      color: var(--text); padding: .6rem .9rem; border-radius: 12px; font-weight:600;
-      box-shadow: var(--shadow);
-      transition: transform .15s ease, box-shadow .15s ease, border-color .2s ease;
-    }
-    .btn:hover { transform: translateY(-1px) }
+    /* FILTERS */
+    .filters{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 0}
+    .chips{display:flex;gap:10px;flex-wrap:wrap}
+    .chip{padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.08);background:#111114;font-size:13px;cursor:pointer;opacity:.9}
+    .chip.active{background:linear-gradient(135deg, rgba(255,90,0,.25), rgba(255,134,64,.25));border-color:rgba(255,134,64,.5)}
+    .sort{display:flex;align-items:center;gap:8px}
+    select{appearance:none;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:#111114;color:var(--text)}
 
-    /* ===== Hero ===== */
-    .hero { display:grid; grid-template-columns: 1.2fr .8fr; gap: 2rem; padding: 4.5rem 0 3rem }
-    .title { font-size: clamp(2rem, 1.2rem + 2.6vw, 3.2rem); line-height:1.1; margin: 0 0 .75rem }
-    .subtitle { font-size: 1.05rem; color: var(--muted); margin: 0 0 1.25rem }
-    .hero-cta { display:flex; gap:.75rem; flex-wrap: wrap }
+    /* GRID */
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    @media (max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:820px){.head{grid-template-columns:1fr}.cta-bar{display:none}.banner-inner{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:520px){.grid{grid-template-columns:1fr}}
 
-    .avatar {
-      width: 220px; aspect-ratio: 1/1; border-radius: 18px; overflow: hidden;
-      box-shadow: var(--shadow); border:1px solid color-mix(in oklab, var(--text), transparent 88%);
-    }
-    .avatar img { width: 100%; height: 100%; object-fit: cover }
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .thumb{position:relative;aspect-ratio:16/10;overflow:hidden}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+    .card:hover .thumb img{transform:scale(1.06)}
+    .discount{position:absolute;left:10px;top:10px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;padding:6px 9px;border-radius:10px;font-weight:800;font-size:12px}
+    .body{padding:14px 14px 12px;display:flex;flex-direction:column;gap:10px}
+    .title{font-weight:700;line-height:1.3}
+    .meta{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--muted)}
+    .price{display:flex;align-items:center;gap:8px}
+    .price .now{font-weight:800;color:#fff}
+    .price .old{color:var(--muted);text-decoration:line-through}
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:11px;border:1px dashed rgba(255,255,255,.15);padding:4px 8px;border-radius:999px;color:#cfcfd6}
+    .actions{display:flex;gap:10px;margin-top:auto}
+    .btn.buy{flex:1;justify-content:center;background:linear-gradient(135deg,var(--brand),var(--brand-2));border:none;color:#fff;font-weight:800}
+    .btn.view{flex:1;justify-content:center}
 
-    .glass-card {
-      background: color-mix(in oklab, var(--bg-soft), transparent 8%);
-      border: 1px solid color-mix(in oklab, var(--text), transparent 90%);
-      border-radius: 18px; padding: 1.25rem; box-shadow: var(--shadow);
-    }
-    .badges { display:flex; flex-wrap:wrap; gap:.5rem }
-    .badge { padding:.35rem .6rem; border-radius: 999px; font-size:.82rem;
-      border:1px solid color-mix(in oklab, var(--text), transparent 85%);
-      background: linear-gradient(to bottom right, color-mix(in oklab, var(--brand-2), transparent 88%), transparent 70%);
-    }
-
-    /* ===== Sections ===== */
-    section { padding: 2.5rem 0 }
-    h2.section-title { font-size: clamp(1.25rem, 1rem + 1.2vw, 1.8rem); margin: 0 0 1rem }
-    .grid { display:grid; gap: 1rem }
-    .grid.cols-3 { grid-template-columns: repeat(3, 1fr) }
-    .grid.cols-2 { grid-template-columns: repeat(2, 1fr) }
-
-    /* Project cards */
-    .card { position:relative; overflow: clip }
-    .card .thumb { border-radius: 14px; overflow: hidden; border:1px solid color-mix(in oklab, var(--text), transparent 90%); }
-    .card .thumb img { width:100%; height:190px; object-fit:cover; filter: saturate(1.05) contrast(1.05) }
-    .card .meta { display:flex; align-items:center; justify-content:space-between; gap:.75rem; margin-top:.75rem }
-    .card .meta a { font-weight:600; }
-    .card .desc { color: var(--muted); font-size:.95rem; margin-top:.4rem }
-
-    /* Timeline */
-    .timeline { position: relative; margin-left: .75rem }
-    .timeline::before { content:""; position:absolute; left:0; top:.3rem; bottom:.3rem; width:2px; background: color-mix(in oklab, var(--brand), transparent 60%) }
-    .time-item { position:relative; padding: .2rem 0 .2rem 1.25rem }
-    .time-item::before { content:""; position:absolute; left:-4px; top:.55rem; width:10px; height:10px; border-radius:999px; background: radial-gradient(circle at 30% 30%, var(--brand-2), var(--brand)); box-shadow:0 0 0 4px var(--ring) }
-    .time-item h3 { margin:.1rem 0 0; font-size:1rem }
-    .time-item p { margin:.2rem 0 0; color:var(--muted); font-size:.95rem }
-
-    /* Footer */
-    footer { padding: 2rem 0 3rem; color: var(--muted); font-size:.95rem }
-
-    /* Responsive */
-    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } .avatar { width: 180px } .grid.cols-3 { grid-template-columns: 1fr 1fr } }
-    @media (max-width: 640px) { .grid.cols-3, .grid.cols-2 { grid-template-columns: 1fr } }
-
-    /* Focus styles */
-    :where(a, button, .btn, [tabindex]) { outline: none }
-    :where(a, button, .btn, [tabindex]):focus-visible { box-shadow: 0 0 0 4px var(--ring); border-color: var(--brand) }
+    footer{margin:36px 0 60px;color:var(--muted)}
+    .fine{font-size:12px;opacity:.8}
   </style>
 </head>
 <body>
   <header>
-    <div class="container nav" role="navigation" aria-label="Chính">
-      <a href="#top" class="brand">
-        <span class="dot" aria-hidden="true"></span> <span>Your Name</span>
-      </a>
-      <nav style="display:flex; gap:.25rem; align-items:center">
-        <a class="link" href="#about">Giới thiệu</a>
-        <a class="link" href="#projects">Dự án</a>
-        <a class="link" href="#skills">Kỹ năng</a>
-        <a class="link" href="#experience">Kinh nghiệm</a>
-        <a class="link" href="#contact">Liên hệ</a>
-      </nav>
-      <div class="actions">
-        <button id="themeToggle" class="btn" aria-label="Đổi giao diện sáng/tối">
-          <!-- Sun/Moon icon -->
-          <svg id="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path id="sun" d="M12 4V2m0 20v-2M4 12H2m20 0h-2M5 5 3.5 3.5M20.5 20.5 19 19M19 5l1.5-1.5M3.5 20.5 5 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5" />
-          </svg>
-          <span class="sr-only">Đổi giao diện</span>
-        </button>
-        <a class="btn" href="assets/your-cv.pdf" download>CV</a>
+    <div class="container head">
+      <a class="logo" href="/"><span class="logo-badge">D</span> Digital Shop</a>
+      <div class="search">
+        <input id="q" type="search" placeholder="Tìm sản phẩm số... (VD: template, ebook, plugin)"/>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 21l-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <div class="cta-bar">
+        <a class="btn" href="#help">Hỗ trợ</a>
+        <a class="btn brand" href="#deal">Ưu đãi hôm nay</a>
       </div>
     </div>
   </header>
 
-  <main id="top" class="container">
-    <!-- Hero -->
-    <section class="hero" aria-label="Giới thiệu nhanh">
-      <div>
-        <h1 class="title">Xin chào, mình là <span style="background:linear-gradient(90deg,var(--brand),var(--brand-2)); -webkit-background-clip:text; background-clip:text; color:transparent">Your Name</span>.</h1>
-        <p class="subtitle">Front‑end Engineer • UI/UX Enthusiast • Builder. Mình tạo ra sản phẩm nhanh, gọn, đẹp và dễ mở rộng.</p>
-        <div class="hero-cta">
-          <a class="btn" href="#projects">Xem dự án</a>
-          <a class="btn" href="#contact">Liên hệ</a>
-        </div>
-        <div class="glass-card" style="margin-top:1rem">
-          <div class="badges" aria-label="Tech stack">
-            <span class="badge">HTML</span>
-            <span class="badge">CSS</span>
-            <span class="badge">JavaScript</span>
-            <span class="badge">React</span>
-            <span class="badge">Tailwind</span>
-            <span class="badge">Node</span>
+  <main class="container">
+    <section class="hero">
+      <div class="banner">
+        <div class="banner-inner">
+          <div>
+            <h1>Kho sản phẩm số chọn lọc</h1>
+            <p class="sub">Template, plugin, khoá học, ebook… giao diện nhanh, đẹp, tối giản – lấy cảm hứng từ Taobao.</p>
+            <div class="badges">
+              <span class="pill">Tải tức thì</span>
+              <span class="pill">Thanh toán an toàn</span>
+              <span class="pill">Hoàn tiền 7 ngày</span>
+            </div>
           </div>
-        </div>
-      </div>
-      <aside aria-label="Ảnh đại diện">
-        <div class="avatar" aria-hidden="true">
-          <img src="assets/avatar.jpg" alt="Ảnh chân dung của bạn" width="440" height="440" loading="eager" />
-        </div>
-      </aside>
-    </section>
-
-    <!-- About -->
-    <section id="about">
-      <h2 class="section-title">Về mình</h2>
-      <div class="glass-card">
-        <p>Đam mê trải nghiệm người dùng, mình theo đuổi triết lý <em>“đơn giản mà tinh tế”</em>. Mình thích xây những giao diện có hiệu năng cao, dễ truy cập (a11y) và dễ mở rộng. Hiện quan tâm tới Web Performance, Design Systems và AI cho UI.</p>
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects">
-      <h2 class="section-title">Dự án nổi bật</h2>
-      <div class="grid cols-3" role="list">
-        <!-- Project 1 -->
-        <article class="card glass-card" role="listitem">
-          <div class="thumb"><img src="assets/p1.jpg" alt="Ảnh xem trước dự án 1" width="640" height="360" loading="lazy"></div>
-          <div class="meta">
-            <a href="https://yourproject1.example" target="_blank" rel="noopener">Project One</a>
-            <div class="badges"><span class="badge">React</span><span class="badge">Vite</span></div>
-          </div>
-          <p class="desc">Hệ thống dashboard nội bộ giúp giảm 30% thời gian thao tác của CSKH.</p>
-        </article>
-        <!-- Project 2 -->
-        <article class="card glass-card" role="listitem">
-          <div class="thumb"><img src="assets/p2.jpg" alt="Ảnh xem trước dự án 2" width="640" height="360" loading="lazy"></div>
-          <div class="meta">
-            <a href="https://yourproject2.example" target="_blank" rel="noopener">Landing X</a>
-            <div class="badges"><span class="badge">HTML</span><span class="badge">CSS</span></div>
-          </div>
-          <p class="desc">Trang đích tối ưu điểm Lighthouse 100/100, tăng tỉ lệ chuyển đổi 2.1×.</p>
-        </article>
-        <!-- Project 3 -->
-        <article class="card glass-card" role="listitem">
-          <div class="thumb"><img src="assets/p3.jpg" alt="Ảnh xem trước dự án 3" width="640" height="360" loading="lazy"></div>
-          <div class="meta">
-            <a href="https://yourproject3.example" target="_blank" rel="noopener">Open Source UI</a>
-            <div class="badges"><span class="badge">JS</span><span class="badge">OSS</span></div>
-          </div>
-          <p class="desc">Thư viện component nhẹ <1KB mỗi component, hỗ trợ a11y.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- Skills -->
-    <section id="skills">
-      <h2 class="section-title">Kỹ năng & Công cụ</h2>
-      <div class="glass-card grid cols-2">
-        <div>
-          <h3 style="margin:.25rem 0 .5rem">Kỹ năng chính</h3>
-          <ul>
-            <li>Thiết kế và triển khai giao diện tối ưu hiệu năng</li>
-            <li>Thiết lập thiết kế hệ thống (Design System)</li>
-            <li>Tích hợp API, state management</li>
-          </ul>
-        </div>
-        <div>
-          <h3 style="margin:.25rem 0 .5rem">Công cụ</h3>
-          <div class="badges">
-            <span class="badge">Git</span>
-            <span class="badge">Vite</span>
-            <span class="badge">Figma</span>
-            <span class="badge">Vitest</span>
-            <span class="badge">Vercel</span>
-            <span class="badge">Cloudflare</span>
+          <div>
+            <img src="https://images.unsplash.com/photo-1557825835-a5267448e259?q=80&w=1200&auto=format&fit=crop" alt="Digital goods" style="width:100%;border-radius:14px;border:1px solid rgba(255,255,255,.08)"/>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Experience -->
-    <section id="experience">
-      <h2 class="section-title">Kinh nghiệm</h2>
-      <div class="glass-card timeline">
-        <div class="time-item">
-          <h3>Front‑end Engineer • Công ty ABC <span style="opacity:.7">(2023 – Nay)</span></h3>
-          <p>Phát triển web app phục vụ 200k người dùng/tháng. Dẫn dắt cải thiện Core Web Vitals (LCP < 2s).</p>
-        </div>
-        <div class="time-item">
-          <h3>UI Developer • Studio XYZ <span style="opacity:.7">(2021 – 2023)</span></h3>
-          <p>Xây dựng landing & component library dùng lại cho 10+ dự án.</p>
-        </div>
+    <section class="filters">
+      <div class="chips" id="chips"></div>
+      <div class="sort">
+        <label for="sort">Sắp xếp:</label>
+        <select id="sort">
+          <option value="popular">Phổ biến</option>
+          <option value="new">Mới nhất</option>
+          <option value="price-asc">Giá thấp → cao</option>
+          <option value="price-desc">Giá cao → thấp</option>
+        </select>
       </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact">
-      <h2 class="section-title">Liên hệ</h2>
-      <div class="glass-card">
-        <p>Sẵn sàng hợp tác và trao đổi cơ hội mới. Gửi email tới <a href="mailto:you@example.com">you@example.com</a> hoặc nhắn mình trên các nền tảng dưới đây.</p>
-        <div class="badges" aria-label="Mạng xã hội">
-          <a class="badge" href="https://github.com/your-username" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
-          <a class="badge" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
-          <a class="badge" href="https://twitter.com/your-handle" target="_blank" rel="noopener" aria-label="Twitter/X">Twitter</a>
-        </div>
-      </div>
-    </section>
+    <section id="results" class="grid"></section>
 
     <footer>
       <div class="container">
-        © <span id="y"></span> • Your Name. Xây với HTML/CSS/JS thuần & tối ưu cho GitHub Pages.
+        <p class="fine">* Một số liên kết có thể mang lại khoản hỗ trợ vận hành cho cửa hàng khi bạn mua hàng. Chúng tôi luôn ưu tiên đề xuất minh bạch, không ảnh hưởng đến giá của bạn.</p>
       </div>
     </footer>
   </main>
 
-  <!-- Structured data (SEO) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Your Name",
-    "url": "https://<your-username>.github.io/",
-    "sameAs": [
-      "https://github.com/your-username",
-      "https://www.linkedin.com/in/your-handle",
-      "https://twitter.com/your-handle"
-    ],
-    "jobTitle": "Front-end Engineer",
-    "image": "https://raw.githubusercontent.com/<your-username>/<your-repo>/main/assets/avatar.jpg"
-  }
-  </script>
-
-  <!-- JS nhỏ gọn, không phụ thuộc thư viện -->
   <script>
-    // Năm footer
-    document.getElementById('y').textContent = new Date().getFullYear();
+    // ====== SAMPLE DATA (thay bằng dữ liệu thật của bạn) ======
+    const PRODUCTS = [
+      { id:"tpl-fig-01", name:"UI Kit Shop – Figma", price:19, oldPrice:39, img:"https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1200&auto=format&fit=crop", tags:["Template","Design"], cat:"Template", popular:98, date:"2025-10-01", url:"https://example.com/figma-uikit?ref=shop" },
+      { id:"plg-wp-01", name:"Plugin SEO Booster (WP)", price:15, oldPrice:29, img:"https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=1200&auto=format&fit=crop", tags:["Plugin","WordPress"], cat:"Plugin", popular:120, date:"2025-09-20", url:"https://example.com/wp-seo?ref=shop" },
+      { id:"ebook-ai-01", name:"Ebook: AI Prompt Mastery", price:9, oldPrice:19, img:"https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop", tags:["Ebook","AI"], cat:"Ebook", popular:76, date:"2025-08-15", url:"https://example.com/ai-prompt?ref=shop" },
+      { id:"course-ux-01", name:"Khoá học UX căn bản", price:29, oldPrice:59, img:"https://images.unsplash.com/photo-1555421689-43cad7100755?q=80&w=1200&auto=format&fit=crop", tags:["Khoá học","UX"], cat:"Khoá học", popular:130, date:"2025-10-12", url:"https://example.com/ux-course?ref=shop" },
+      { id:"tpl-ps-01", name:"Preset Lightroom Cinematic", price:7, oldPrice:14, img:"https://images.unsplash.com/photo-1504265951481-22925d638ef4?q=80&w=1200&auto=format&fit=crop", tags:["Preset","Ảnh"], cat:"Template", popular:65, date:"2025-07-05", url:"https://example.com/preset?ref=shop" },
+      { id:"ebook-mkt-01", name:"Ebook: Tăng trưởng TikTok", price:11, oldPrice:22, img:"https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200&auto=format&fit=crop", tags:["Ebook","Marketing"], cat:"Ebook", popular:92, date:"2025-09-01", url:"https://example.com/tiktok-growth?ref=shop" },
+    ];
 
-    // Theme toggle (ưu tiên hệ thống, lưu vào localStorage)
-    const cl = document.documentElement.classList;
-    const storageKey = 'theme';
-    const saved = localStorage.getItem(storageKey);
+    const CATS = ["Tất cả","Template","Plugin","Ebook","Khoá học","AI Prompt"];
 
-    const applyTheme = (mode) => {
-      cl.remove('light','dark');
-      cl.add(mode);
-      localStorage.setItem(storageKey, mode);
-      // đổi icon đơn giản
-      document.getElementById('icon').style.transform = mode === 'light' ? 'rotate(0deg)' : 'rotate(180deg)';
-    };
+    const elResults = document.getElementById('results');
+    const elChips = document.getElementById('chips');
+    const elSort = document.getElementById('sort');
+    const elQ = document.getElementById('q');
 
-    if (saved === 'light' || saved === 'dark') {
-      applyTheme(saved);
-    } else {
-      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-      applyTheme(prefersLight ? 'light' : 'dark');
-    }
-
-    document.getElementById('themeToggle').addEventListener('click', () => {
-      applyTheme(cl.contains('light') ? 'dark' : 'light');
-    });
-    if (saved === 'light') cl.add('light');
-    if (saved === 'dark') cl.remove('light');
-
-    document.getElementById('themeToggle').addEventListener('click', () => {
-      const isLight = cl.toggle('light');
-      localStorage.setItem(storageKey, isLight ? 'light' : 'dark');
+    // Build chips
+    CATS.forEach((c,i)=>{
+      const b = document.createElement('button');
+      b.className = 'chip'+(i===0?' active':'');
+      b.textContent = c;
+      b.dataset.cat = c;
+      b.onclick = ()=>{ document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active')); b.classList.add('active'); render(); };
+      elChips.appendChild(b);
     });
 
-    // Motion-safe fade-in
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const els = document.querySelectorAll('.glass-card, .card, .title, .subtitle, .avatar');
-      els.forEach((el,i) => {
-        el.style.opacity = 0; el.style.transform = 'translateY(8px)';
-        setTimeout(() => { el.style.transition = 'opacity .6s ease, transform .6s ease'; el.style.opacity = 1; el.style.transform = 'none'; }, 80 + i*60);
-      });
+    elSort.onchange = render;
+    elQ.oninput = ()=>{ render(); };
+
+    function filtered(){
+      const cat = document.querySelector('.chip.active')?.dataset.cat || 'Tất cả';
+      const q = (elQ.value||'').toLowerCase().trim();
+      let arr = PRODUCTS.slice();
+      if(cat!=="Tất cả"){ arr = arr.filter(p=>p.cat===cat); }
+      if(q){ arr = arr.filter(p=> (p.name+" "+p.tags.join(" ")).toLowerCase().includes(q)); }
+      const s = elSort.value;
+      if(s==='new'){ arr.sort((a,b)=> new Date(b.date)-new Date(a.date)); }
+      else if(s==='price-asc'){ arr.sort((a,b)=> a.price-b.price); }
+      else if(s==='price-desc'){ arr.sort((a,b)=> b.price-a.price); }
+      else { arr.sort((a,b)=> b.popular-a.popular); }
+      return arr;
     }
+
+    function money(n){ return n.toLocaleString('vi-VN', { style:'currency', currency:'VND' }).replace('₫','đ'); }
+
+    function card(p){
+      const utm = `utm_source=shop&utm_medium=referral&utm_campaign=${encodeURIComponent(p.id)}`;
+      const link = p.url + (p.url.includes('?')?'&':'?') + utm;
+      return `
+        <article class="card">
+          <div class="thumb">
+            <img src="${p.img}" alt="${p.name}" loading="lazy"/>
+            <span class="discount">-${Math.round((1-p.price/p.oldPrice)*100)}%</span>
+          </div>
+          <div class="body">
+            <div class="title">${p.name}</div>
+            <div class="meta">
+              <div class="price"><span class="now">${money(p.price*1000)}</span><span class="old">${money(p.oldPrice*1000)}</span></div>
+              <div>Đã bán ${p.popular}</div>
+            </div>
+            <div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+            <div class="actions">
+              <a class="btn view" href="#" data-id="${p.id}" data-link="${link}">Xem chi tiết</a>
+              <a class="btn buy" href="#" data-id="${p.id}" data-link="${link}">Mua ngay</a>
+            </div>
+          </div>
+        </article>`;
+    }
+
+    function render(){
+      const arr = filtered();
+      elResults.innerHTML = arr.map(card).join('');
+      document.querySelectorAll('.actions .btn').forEach(btn=>{
+        btn.addEventListener('click', (e)=>{
+          e.preventDefault();
+          const url = e.currentTarget.getAttribute('data-link');
+          // mở tab mới, tránh chuyển hướng chậm
+          window.open(url, '_blank', 'noopener');
+        })
+      })
+    }
+
+    render();
   </script>
-
-  <!-- Tối ưu Lighthouse: không dùng thư viện nặng, ảnh lazy, css inline, meta SEO đầy đủ -->
 </body>
 </html>
