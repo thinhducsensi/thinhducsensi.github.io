@@ -31,8 +31,8 @@
       --ring: rgba(14,165,233,.35);
       --shadow: 0 10px 30px rgba(2,8,23,.45);
     }
-    @media (prefers-color-scheme: light) {
-      :root { --bg:#f8fafc; --bg-soft:#ffffff; --card:#ffffff; --text:#0b1220; --muted:#334155; --ring:rgba(14,165,233,.25); }
+    :root.light { --bg:#f8fafc; --bg-soft:#ffffff; --card:#ffffff; --text:#0b1220; --muted:#334155; --ring:rgba(14,165,233,.25); }
+:root.dark { --bg:#0b1220; --bg-soft:#0f172a; --card:#11192c; --text:#e5e7eb; --muted:#9ca3af; --ring:rgba(14,165,233,.35); }
     }
 
     * { box-sizing: border-box }
@@ -322,6 +322,25 @@
     const cl = document.documentElement.classList;
     const storageKey = 'theme';
     const saved = localStorage.getItem(storageKey);
+
+    const applyTheme = (mode) => {
+      cl.remove('light','dark');
+      cl.add(mode);
+      localStorage.setItem(storageKey, mode);
+      // đổi icon đơn giản
+      document.getElementById('icon').style.transform = mode === 'light' ? 'rotate(0deg)' : 'rotate(180deg)';
+    };
+
+    if (saved === 'light' || saved === 'dark') {
+      applyTheme(saved);
+    } else {
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      applyTheme(prefersLight ? 'light' : 'dark');
+    }
+
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      applyTheme(cl.contains('light') ? 'dark' : 'light');
+    });
     if (saved === 'light') cl.add('light');
     if (saved === 'dark') cl.remove('light');
 
