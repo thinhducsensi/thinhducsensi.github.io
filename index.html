@@ -272,7 +272,7 @@
 
     // Generate a standalone index.html that fetches products from products.json
     document.getElementById('btnDownloadSite').onclick = ()=>{
-      const html = generateSiteHTML();
+      const html = generateSiteHTML().replaceAll('</script>','<\/script>');
       const blob = new Blob([html], {type:'text/html'});
       const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'index.html'; a.click(); URL.revokeObjectURL(a.href);
     };
