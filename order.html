@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Tra cứu trạng thái đơn</title>
+<style>body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#0b0b0c;color:#f3f3f4;margin:0;display:grid;place-items:center;min-height:100vh}
+.card{width:520px;background:#111114;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px}
+.input{width:100%;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:#0f0f11;color:#f3f3f4;margin-bottom:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:#131316;color:#f3f3f4;cursor:pointer}
+small{color:#9a9aa0}</style></head><body>
+<div class="card">
+  <h3 style="margin-top:0">Tra cứu đơn</h3>
+  <input id="oid" class="input" placeholder="Order ID">
+  <input id="sec" class="input" placeholder="Mã bí mật">
+  <button id="btn" class="btn">Kiểm tra</button>
+  <div id="out" style="margin-top:10px"></div>
+  <p><small>Nếu cần hỗ trợ nhanh, vui lòng liên hệ Zalo và gửi Order ID + ảnh bill.</small></p>
+</div>
+<script>
+const q = new URL(location.href).searchParams;
+if(q.get('oid')) document.getElementById('oid').value = q.get('oid');
+document.getElementById('btn').onclick = ()=>{
+  const oid = document.getElementById('oid').value.trim();
+  const sec = document.getElementById('sec').value.trim();
+  if(!oid || !sec){ return alert('Nhập Order ID và Mã bí mật'); }
+  fetch('orders.json', {cache:'no-store'}).then(r=>r.json()).then(arr=>{
+    const o = arr.find(x => x.orderId === oid);
+    if(!o) return document.getElementById('out').textContent = 'Không tìm thấy đơn.';
+    if((o.secret||'') !== sec) return document.getElementById('out').textContent = 'Mã bí mật không đúng.';
+    document.getElementById('out').innerHTML = `Trạng thái: <strong>${o.status}</strong><br>Ghi chú: ${o.result||'N/A'}`;
+  }).catch(()=> document.getElementById('out').textContent='Không tải được trạng thái.');
+};
+</script>
+</body></html>
