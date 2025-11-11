@@ -1,1 +1,33 @@
-<!doctype html><title>confirm</title>
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Gửi bill xác nhận</title>
+<style>
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#0b0b0c;color:#f3f3f4;margin:0;display:grid;place-items:center;min-height:100vh}
+.card{width:min(640px,92vw);background:#111114;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:#131316;color:#f3f3f4;cursor:pointer;text-decoration:none;margin-right:8px}
+small{color:#9a9aa0}
+pre{white-space:pre-wrap;background:#0f0f11;padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,.08)}
+</style></head><body>
+<div class="card">
+  <h3 style="margin-top:0">Gửi bill xác nhận</h3>
+  <p><small>Vui lòng gửi ảnh bill qua Zalo hoặc biểu mẫu (nếu có). Nội dung nhắn gợi ý bên dưới đã kèm Order ID.</small></p>
+  <div id="info"></div>
+  <div style="margin:10px 0">
+    <button class="btn" id="copy">Copy nội dung</button>
+    <a class="btn" href="https://zalo.me/0964451836" target="_blank" rel="noopener">Mở Zalo</a>
+    <a class="btn" id="form" href="#" target="_blank" rel="noopener" style="display:none">Mở form gửi bill</a>
+  </div>
+  <pre id="text"></pre>
+  <p><small>Sau khi bạn gửi bill, mình sẽ kiểm tra và cập nhật trạng thái đơn. Bạn có thể theo dõi ở <a id="st" href="#">trang theo dõi</a>.</small></p>
+</div>
+<script>
+const q = new URL(location.href).searchParams;
+const oid = q.get('oid')||'';
+const sec = q.get('sec')||'';
+const amt = q.get('amt')||'';
+const text = `Chào bạn, mình đã chuyển khoản.\nOrder ID: ${oid}\nMã bí mật: ${sec}\nSố tiền: ${Number(amt||0).toLocaleString()} VND\nMình đính kèm ảnh bill. Nhờ bạn hỗ trợ tạo & quét WeChat nhé!`;
+document.getElementById('text').textContent = text;
+document.getElementById('copy').onclick = ()=>navigator.clipboard.writeText(text);
+document.getElementById('st').href = 'o.html?oid=' + encodeURIComponent(oid);
+document.getElementById('info').innerHTML = `<div>Order ID: <strong>${oid}</strong></div><div>Mã bí mật: <strong>${sec}</strong></div>`;
+</script>
+</body></html>
