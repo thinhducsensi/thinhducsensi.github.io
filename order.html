@@ -14,18 +14,20 @@ small{color:#9a9aa0}</style></head><body>
   <p><small>Nếu cần hỗ trợ nhanh, vui lòng liên hệ Zalo và gửi Order ID + ảnh bill.</small></p>
 </div>
 <script>
+const GAS_URL = "https://script.google.com/macros/s/AKfycbyEIzP-IL2mYRI1wcUWKwH5m5adFYKFz4kc0F3wWNwR10nf1hM0b9XrRbOjL_HZs-Ku/exec";
 const q = new URL(location.href).searchParams;
 if(q.get('oid')) document.getElementById('oid').value = q.get('oid');
 document.getElementById('btn').onclick = ()=>{
   const oid = document.getElementById('oid').value.trim();
   const sec = document.getElementById('sec').value.trim();
-  if(!oid || !sec){ return alert('Nhập Order ID và Mã bí mật'); }
-  fetch('orders.json', {cache:'no-store'}).then(r=>r.json()).then(arr=>{
-    const o = arr.find(x => x.orderId === oid);
-    if(!o) return document.getElementById('out').textContent = 'Không tìm thấy đơn.';
-    if((o.secret||'') !== sec) return document.getElementById('out').textContent = 'Mã bí mật không đúng.';
-    document.getElementById('out').innerHTML = `Trạng thái: <strong>${o.status}</strong><br>Ghi chú: ${o.result||'N/A'}`;
-  }).catch(()=> document.getElementById('out').textContent='Không tải được trạng thái.');
+  if(!oid || !sec) return alert('Nhập Order ID và Mã bí mật');
+  fetch(GAS_URL + '?action=get&orderId=' + encodeURIComponent(oid))
+    .then(r=>r.json()).then(o=>{
+      if(!o) return out('Không tìm thấy đơn.');
+      if((o.secret||'') !== sec) return out('Mã bí mật không đúng.');
+      out(`Trạng thái: <strong>${o.status}</strong><br>Ghi chú: ${o.result||'N/A'}`);
+    }).catch(()=> out('Không tải được trạng thái.'));
 };
+function out(html){ document.getElementById('out').innerHTML = html; }
 </script>
 </body></html>
