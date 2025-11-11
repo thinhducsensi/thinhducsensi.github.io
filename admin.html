@@ -4,36 +4,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0b0b0c;--card:#121214;--muted:#9a9aa0;--text:#f3f3f4;--brand:#ff5a00;--brand2:#ff8640;--radius:16px;--max:1100px}
-*{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:#0b0b0c;color:#f3f3f4;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial}
 .container{max-width:var(--max);margin:auto;padding:0 16px}
-header{position:sticky;top:0;background:#0b0b0c;border-bottom:1px solid rgba(255,255,255,.06)}
-.head{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:14px 0}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:#131316;color:#f3f3f4;cursor:pointer}
-.btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand2));border:none;font-weight:800}
 .panel{background:#111114;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:16px;margin:16px 0}
-label{display:block;font-size:12px;color:var(--muted);margin:8px 0 6px}
+label{display:block;font-size:12px;color:#9a9aa0;margin:8px 0 6px}
 input,textarea{width:100%;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:#0f0f11;color:#f3f3f4;outline:none}
 .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
 .item{display:grid;grid-template-columns:56px 1fr auto;gap:10px;align-items:center;padding:8px;border:1px dashed rgba(255,255,255,.12);border-radius:12px;background:#0f0f11;margin-bottom:8px}
 .thumb-sm{width:56px;height:42px;border-radius:8px;overflow:hidden;background:#1a1a1d}
 .thumb-sm img{width:100%;height:100%;object-fit:cover}
 .actions-sm{display:flex;gap:8px}
-small{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:#131316;color:#f3f3f4;cursor:pointer}
+.btn.primary{background:linear-gradient(135deg,#ff5a00,#ff8640);border:none;font-weight:800}
 </style></head><body>
-<header><div class="container head"><strong>Affiliate Admin</strong>
-  <div>
-    <button class="btn" id="btnLoadProducts">Tải products.json</button>
-    <input type="file" id="fileProducts" accept="application/json" style="display:none">
-    <button class="btn" id="btnSaveProducts">Tải xuống products.json</button>
-  </div>
-</div></header>
 <main class="container">
-  <p><small>Luồng vận hành: Khách chuyển khoản → Gửi bill qua Zalo → Bạn xác nhận & quét → cập nhật trạng thái đơn tại đây → Export <code>orders.json</code> và commit lên repo.</small></p>
+  <p><small>Quy trình: Khách chuyển tiền → Gửi bill qua Zalo → Bạn xác nhận & quét → cập nhật <code>orders.json</code> → khách tra cứu ở <code>order.html</code>.</small></p>
 
   <div class="grid">
     <!-- PRODUCTS -->
     <div class="panel">
       <h3>Sản phẩm</h3>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+        <button class="btn" id="btnLoadProducts">Tải products.json</button>
+        <input type="file" id="fileProducts" accept="application/json" style="display:none">
+        <button class="btn" id="btnSaveProducts">Tải xuống products.json</button>
+      </div>
       <label>ID</label><input id="pid">
       <label>Tên</label><input id="pname">
       <label>Giá</label><input id="pprice" type="number" step="0.01">
@@ -57,7 +52,7 @@ small{color:var(--muted)}
       <label>Product ID</label><input id="opid">
       <label>Số tiền</label><input id="oamount" type="number">
       <label>Trạng thái</label><input id="ostatus" placeholder="pending/delivered/rejected">
-      <label>Ghi chú kết quả</label><input id="oresult" placeholder="Ví dụ: Đã quét thành công lúc ...">
+      <label>Ghi chú kết quả</label><input id="oresult" placeholder="Đã tạo & quét lúc ...">
       <div style="margin-top:10px;display:flex;gap:8px">
         <button class="btn primary" id="btnUpsertOrder">Lưu/Update</button>
         <button class="btn" id="btnMarkDone">Đánh dấu thành công</button>
@@ -70,56 +65,22 @@ small{color:var(--muted)}
 <script>
 let PRODUCTS=[], ORDERS=[];
 
-// ========== PRODUCTS ==========
+// PRODUCTS
 const fp = { id: pid, name: pname, price: pprice, oldPrice: pold, img: pimg, url: purl };
 document.getElementById('btnLoadProducts').onclick = ()=> fileProducts.click();
 fileProducts.onchange = e=>{ const f=e.target.files[0]; const r=new FileReader(); r.onload=()=>{ PRODUCTS=JSON.parse(r.result); renderP(); }; r.readAsText(f); };
 document.getElementById('btnSaveProducts').onclick = ()=> download('products.json', JSON.stringify(PRODUCTS,null,2));
-document.getElementById('btnAddP').onclick = ()=>{
-  const p = { id: fp.id.value.trim(), name: fp.name.value.trim(), price: Number(fp.price.value||0), oldPrice: Number(fp.oldPrice.value||0), img: fp.img.value.trim(), url: fp.url.value.trim() };
-  if(!p.id) return alert('Cần ID');
-  const i = PRODUCTS.findIndex(x=>x.id===p.id);
-  if(i>-1) PRODUCTS[i]=p; else PRODUCTS.push(p);
-  renderP();
-};
-function renderP(){
-  const box = document.getElementById('plist'); box.innerHTML='';
-  PRODUCTS.forEach(p=>{
-    const div=document.createElement('div'); div.className='item';
-    div.innerHTML=`<div class="thumb-sm">${p.img?`<img src="${p.img}">`:''}</div><div><div style="font-weight:800">${p.name}</div><div style="color:#9a9aa0">${p.id} · ${p.price*1000}đ</div></div>
-    <div class="actions-sm"><button class="btn" data-id="${p.id}">Sửa</button></div>`;
-    div.querySelector('button').onclick=()=>{ fp.id.value=p.id; fp.name.value=p.name; fp.price.value=p.price; fp.oldPrice.value=p.oldPrice; fp.img.value=p.img; fp.url.value=p.url; };
-    box.appendChild(div);
-  });
-}
+document.getElementById('btnAddP').onclick = ()=>{ const p = { id: fp.id.value.trim(), name: fp.name.value.trim(), price: Number(fp.price.value||0), oldPrice: Number(fp.oldPrice.value||0), img: fp.img.value.trim(), url: fp.url.value.trim() }; if(!p.id) return alert('Cần ID'); const i = PRODUCTS.findIndex(x=>x.id===p.id); if(i>-1) PRODUCTS[i]=p; else PRODUCTS.push(p); renderP(); };
+function renderP(){ const box = document.getElementById('plist'); box.innerHTML=''; PRODUCTS.forEach(p=>{ const div=document.createElement('div'); div.className='item'; div.innerHTML=`<div class="thumb-sm">${p.img?`<img src="${p.img}">`:''}</div><div><div style="font-weight:800">${p.name}</div><div style="color:#9a9aa0">${p.id} · ${(p.price*1000).toLocaleString()}đ</div></div><div class="actions-sm"><button class="btn" data-id="${p.id}">Sửa</button></div>`; div.querySelector('button').onclick=()=>{ fp.id.value=p.id; fp.name.value=p.name; fp.price.value=p.price; fp.oldPrice.value=p.oldPrice; fp.img.value=p.img; fp.url.value=p.url; }; box.appendChild(div); }); }
 
-// ========== ORDERS ==========
+// ORDERS
 const fo = { oid, osecret, opid, oamount, ostatus, oresult };
 document.getElementById('btnLoadOrders').onclick = ()=> fileOrders.click();
 fileOrders.onchange = e=>{ const f=e.target.files[0]; const r=new FileReader(); r.onload=()=>{ ORDERS=JSON.parse(r.result); renderO(); }; r.readAsText(f); };
 document.getElementById('btnExportOrders').onclick = ()=> download('orders.json', JSON.stringify(ORDERS,null,2));
-document.getElementById('btnUpsertOrder').onclick = ()=>{
-  const o = { orderId: fo.oid.value.trim(), secret: fo.osecret.value.trim(), productId: fo.opid.value.trim(), amount: Number(fo.oamount.value||0), status: fo.ostatus.value.trim()||'pending', result: fo.oresult.value.trim() };
-  if(!o.orderId) return alert('Cần Order ID');
-  const i = ORDERS.findIndex(x=>x.orderId===o.orderId);
-  if(i>-1) ORDERS[i]=o; else ORDERS.push(o);
-  renderO();
-};
-document.getElementById('btnMarkDone').onclick = ()=>{
-  const id = fo.oid.value.trim(); if(!id) return alert('Nhập Order ID');
-  const i = ORDERS.findIndex(x=>x.orderId===id); if(i<0) return alert('Không tìm thấy');
-  ORDERS[i].status='delivered'; renderO();
-};
-function renderO(){
-  const box = document.getElementById('olist'); box.innerHTML='';
-  ORDERS.forEach(o=>{
-    const div=document.createElement('div'); div.className='item';
-    div.innerHTML=`<div class="thumb-sm"></div><div><div style="font-weight:800">${o.orderId}</div><div style="color:#9a9aa0">${o.productId||''} • ${o.amount?.toLocaleString()}đ • ${o.status}</div><div style="color:#9a9aa0">Mã: ${o.secret||''}</div><div>${o.result||''}</div></div>
-    <div class="actions-sm"><button class="btn" data-oid="${o.orderId}">Sửa</button></div>`;
-    div.querySelector('button').onclick=()=>{ fo.oid.value=o.orderId; fo.osecret.value=o.secret||''; fo.opid.value=o.productId||''; fo.oamount.value=o.amount||''; fo.ostatus.value=o.status||''; fo.oresult.value=o.result||''; };
-    box.appendChild(div);
-  });
-}
+document.getElementById('btnUpsertOrder').onclick = ()=>{ const o = { orderId: fo.oid.value.trim(), secret: fo.osecret.value.trim(), productId: fo.opid.value.trim(), amount: Number(fo.oamount.value||0), status: fo.ostatus.value.trim()||'pending', result: fo.oresult.value.trim() }; if(!o.orderId) return alert('Cần Order ID'); const i = ORDERS.findIndex(x=>x.orderId===o.orderId); if(i>-1) ORDERS[i]=o; else ORDERS.push(o); renderO(); };
+document.getElementById('btnMarkDone').onclick = ()=>{ const id = fo.oid.value.trim(); if(!id) return alert('Nhập Order ID'); const i = ORDERS.findIndex(x=>x.orderId===id); if(i<0) return alert('Không tìm thấy'); ORDERS[i].status='delivered'; renderO(); };
+function renderO(){ const box = document.getElementById('olist'); box.innerHTML=''; ORDERS.forEach(o=>{ const div=document.createElement('div'); div.className='item'; div.innerHTML=`<div class="thumb-sm"></div><div><div style="font-weight:800">${o.orderId}</div><div style="color:#9a9aa0">${o.productId||''} • ${(o.amount||0).toLocaleString()}đ • ${o.status}</div><div style="color:#9a9aa0">Mã: ${o.secret||''}</div><div>${o.result||''}</div></div><div class="actions-sm"><button class="btn" data-oid="${o.orderId}">Sửa</button></div>`; div.querySelector('button').onclick=()=>{ fo.oid.value=o.orderId; fo.osecret.value=o.secret||''; fo.opid.value=o.productId||''; fo.oamount.value=o.amount||''; fo.ostatus.value=o.status||''; fo.oresult.value=o.result||''; }; box.appendChild(div); }); }
 
 // util
 function download(name, text){ const blob=new Blob([text],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; a.click(); URL.revokeObjectURL(a.href); }

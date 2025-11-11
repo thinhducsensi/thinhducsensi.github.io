@@ -1,39 +1,39 @@
 <!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Digital Shop · Dịch vụ quét QR WeChat</title>
+<title>Dịch vụ tạo & quét QR Wechat</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0b0b0c;--card:#121214;--muted:#9a9aa0;--text:#f3f3f4;--brand:#ff5a00;--brand2:#ff8640;--radius:16px;--max:1200px}
-*{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial}
-.container{max-width:var(--max);margin:auto;padding:0 16px}
-header{position:sticky;top:0;z-index:40;background:linear-gradient(0deg,rgba(11,11,12,.7),rgba(11,11,12,.9));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.06)}
-.head{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:14px 0}
-.logo{font-weight:800;letter-spacing:.3px}
-.cta{display:flex;gap:10px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:#131316;color:#f3f3f4;cursor:pointer}
-.btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand2));border:none;color:#fff;font-weight:800}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-@media(max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:820px){.grid{grid-template-columns:1fr}}
-.card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
-.thumb{aspect-ratio:16/10;overflow:hidden}.thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.body{padding:12px}.title{font-weight:800}.meta{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--muted)}
-.price{display:flex;gap:8px}.old{text-decoration:line-through;color:var(--muted)}
-.section{margin:22px 0}
-.kv{width:100%;border-radius:14px;border:1px solid rgba(255,255,255,.08)}
-.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.pill{padding:6px 10px;border:1px solid rgba(255,255,255,.08);border-radius:999px;font-size:12px;opacity:.9}
+:root{{--bg:#0b0b0c;--card:#121214;--muted:#9a9aa0;--text:#f3f3f4;--brand:#ff5a00;--brand2:#ff8640;--radius:16px;--max:1200px}}
+*{{box-sizing:border-box}}html,body{{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial}}
+.container{{max-width:var(--max);margin:auto;padding:0 16px}}
+header{{position:sticky;top:0;z-index:40;background:linear-gradient(0deg,rgba(11,11,12,.7),rgba(11,11,12,.9));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.06)}}
+.head{{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:14px 0}}
+.logo{{font-weight:800;letter-spacing:.3px}}
+.cta{{display:flex;gap:10px}}
+.btn{{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:#131316;color:#f3f3f4;cursor:pointer}}
+.btn.primary{{background:linear-gradient(135deg,var(--brand),var(--brand2));border:none;color:#fff;font-weight:800}}
+.grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}}
+@media(max-width:1100px){{.grid{{grid-template-columns:repeat(2,1fr)}}}}
+@media(max-width:820px){{.grid{{grid-template-columns:1fr}}}}
+.card{{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}}
+.thumb{{aspect-ratio:16/10;overflow:hidden}}.thumb img{{width:100%;height:100%;object-fit:cover;display:block}}
+.body{{padding:12px}}.title{{font-weight:800}}.meta{{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--muted)}}
+.price{{display:flex;gap:8px}}.old{{text-decoration:line-through;color:var(--muted)}}
+.section{{margin:22px 0}}
+.kv{{width:100%;border-radius:14px;border:1px solid rgba(255,255,255,.08)}}
+.badges{{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}}.pill{{padding:6px 10px;border:1px solid rgba(255,255,255,.08);border-radius:999px;font-size:12px;opacity:.9}}
 </style></head><body>
 <header>
   <div class="container head">
-    <div class="logo">Digital Shop</div>
-    <div class="cta"><a id="zaloBtn" class="btn primary" href="#" target="_blank" rel="noopener">Liên hệ Zalo</a></div>
+    <div class="logo">Dịch vụ tạo & quét QR Wechat</div>
+    <div class="cta"><a id="zaloBtn" class="btn primary" href="https://zalo.me/0964451836" target="_blank" rel="noopener">Liên hệ Zalo</a></div>
   </div>
 </header>
 
 <main class="container">
   <section class="section">
-    <h1 style="margin:0 0 6px">Dịch vụ quét QR WeChat</h1>
-    <p style="opacity:.85;margin:0">Chọn gói, quét QR thanh toán, sau đó <strong>gửi ảnh bill</strong> qua Zalo để được hỗ trợ quét ngay.</p>
+    <h1 style="margin:0 0 6px">Gói tạo tài khoản & hỗ trợ quét Wechat</h1>
+    <p style="opacity:.85;margin:0">Chọn gói, quét QR thanh toán, sau đó <strong>gửi ảnh bill</strong> vào Zalo 0964451836. Mình nhận thông báo → hỗ trợ quét ngay → cập nhật trạng thái thành công.</p>
     <div class="badges"><span class="pill">Xử lý nhanh</span><span class="pill">Hỗ trợ tận tâm</span><span class="pill">Bảo mật</span></div>
   </section>
 
@@ -45,16 +45,16 @@ header{position:sticky;top:0;z-index:40;background:linear-gradient(0deg,rgba(11,
 <!-- BUY MODAL -->
 <div id="buyModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(0,0,0,.6)">
   <div style="width:520px;background:#0f0f11;padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,.06)">
-    <h3 id="buyTitle" style="margin:0 0 8px">Mua lượt quét</h3>
-    <div style="margin:8px 0"><strong>Sản phẩm:</strong> <span id="buyProd"></span></div>
+    <h3 id="buyTitle" style="margin:0 0 8px">Mua lượt tạo tài khoản</h3>
+    <div style="margin:8px 0"><strong>Gói:</strong> <span id="buyProd"></span></div>
     <div style="margin:8px 0"><strong>Số tiền:</strong> <span id="buyAmount"></span> VND</div>
-    <div style="margin:8px 0"><img id="payQR" src="" alt="QR thanh toán" style="width:180px;height:180px;border-radius:8px"></div>
-    <div style="margin:8px 0"><small>Sau khi chuyển tiền, vui lòng <strong>gửi ảnh bill</strong> qua Zalo cùng với <em>Order ID</em> & <em>Mã bí mật</em> bên dưới.</small></div>
+    <div style="margin:8px 0"><img id="payQR" src="assets/qr.png" alt="QR thanh toán" style="width:180px;height:180px;border-radius:8px;background:#fff"></div>
+    <div style="margin:8px 0"><small>Sau khi chuyển, <strong>gửi ảnh bill</strong> kèm <em>Order ID</em> & <em>Mã bí mật</em> tới Zalo 0964451836.</small></div>
     <div style="margin:8px 0"><label>Order ID: <strong id="orderIdText"></strong></label></div>
     <div style="margin:8px 0"><label>Mã bí mật: <strong id="secretText"></strong></label></div>
     <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
       <button id="btnCopy" class="btn">Copy Order ID & Mã</button>
-      <a id="btnZaloSend" class="btn primary" href="#" target="_blank" rel="noopener">Gửi bill qua Zalo</a>
+      <a id="btnZaloSend" class="btn primary" href="https://zalo.me/0964451836" target="_blank" rel="noopener">Gửi bill qua Zalo</a>
       <a id="btnStatus" class="btn" href="#" target="_blank" rel="noopener">Xem trạng thái</a>
       <button id="btnCloseBuy" class="btn">Đóng</button>
     </div>
@@ -63,17 +63,8 @@ header{position:sticky;top:0;z-index:40;background:linear-gradient(0deg,rgba(11,
 </div>
 
 <script>
-// ===== CONFIG =====
-const siteConfig = {
-  contact: {
-    zaloUrl: "https://zalo.me/0123456789", // TODO: thay link Zalo
-    payQr: "" // TODO: dán link ảnh QR thanh toán (Momo/ZaloPay/Bank QR)
-  }
-};
-document.getElementById('zaloBtn').href = siteConfig.contact.zaloUrl;
-
-// ===== PRODUCTS =====
-const PRODUCTS = [{"id": "scan-wechat-01", "slug": "scan-wechat-01", "name": "Gói 1 lượt quét WeChat (xác minh QR)", "price": 45, "oldPrice": 60, "img": "https://images.unsplash.com/photo-1555421689-43cad7100755?q=80&w=1200&auto=format&fit=crop", "tags": ["WeChat", "QR Verify"], "cat": "Dịch vụ", "popular": 123, "date": "2025-10-28", "url": "https://example.com/wechat-service"}];
+// PRODUCTS (đơn vị giá: nghìn VND)
+const PRODUCTS = [{"id": "wechat-create-01", "slug": "wechat-create-01", "name": "Gói 1 lượt tạo WeChat", "price": 50, "oldPrice": 80, "img": "https://images.unsplash.com/photo-1555421689-43cad7100755?q=80&w=1200&auto=format&fit=crop", "tags": ["WeChat", "Create"], "cat": "Dịch vụ", "popular": 256, "date": "2025-10-28", "url": "https://example.com/wechat-create"}];
 
 function money(n){try{return Number(n).toLocaleString('vi-VN',{style:'currency',currency:'VND'}).replace('₫','đ')}catch(e){return n}}
 function disc(p){return (p.price&&p.oldPrice)?('-'+Math.round((1-p.price/p.oldPrice)*100)+'%'):''}
@@ -82,7 +73,7 @@ function card(p){
   return `<article class="card"><div class="thumb"><img src="${p.img||''}" alt="${p.name||''}"></div>
   <div class="body"><div class="title">${p.name||''}</div>
   <div class="meta"><div class="price">${now} ${old?`<span class="old">${old}</span>`:''}</div><div>${disc(p)}</div></div>
-  <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"><a class="btn" href="javascript:void(0)" data-buy="${p.id}">Xem chi tiết</a><a class="btn primary" href="javascript:void(0)" data-buy="${p.id}">Mua lượt quét</a></div></div></article>`;
+  <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"><a class="btn primary" href="javascript:void(0)" data-buy="${p.id}">Mua lượt tạo tài khoản</a></div></div></article>`;
 }
 document.getElementById('results').innerHTML = PRODUCTS.map(card).join('');
 document.querySelectorAll('[data-buy]').forEach(b=>b.onclick=()=>{
@@ -90,9 +81,8 @@ document.querySelectorAll('[data-buy]').forEach(b=>b.onclick=()=>{
   openBuyModal(p);
 });
 
-// ===== BUY MODAL LOGIC =====
+// BUY MODAL
 const modal = document.getElementById('buyModal');
-const aZalo = document.getElementById('btnZaloSend');
 const aStatus = document.getElementById('btnStatus');
 const btnCopy = document.getElementById('btnCopy');
 let CURRENT_ORDER = null;
@@ -105,16 +95,14 @@ function openBuyModal(product){
   document.getElementById('buyAmount').textContent = CURRENT_ORDER.amount.toLocaleString();
   document.getElementById('orderIdText').textContent = orderId;
   document.getElementById('secretText').textContent = secret;
-  document.getElementById('payQR').src = siteConfig.contact.payQr || '';
-  aZalo.href = siteConfig.contact.zaloUrl;
   aStatus.href = 'order.html?oid=' + encodeURIComponent(orderId);
   modal.style.display='flex';
 }
 document.getElementById('btnCloseBuy').onclick = ()=>{ modal.style.display='none'; };
 
 btnCopy.onclick = async ()=>{
-  const txt = `Order ID: ${CURRENT_ORDER.orderId}\nMã bí mật: ${CURRENT_ORDER.secret}\nSản phẩm: ${CURRENT_ORDER.productId}\nSố tiền: ${CURRENT_ORDER.amount.toLocaleString()} VND`;
-  try{ await navigator.clipboard.writeText(txt); document.getElementById('buyMsg').textContent = 'Đã copy thông tin. Hãy gửi kèm ảnh bill qua Zalo.'; }catch(e){ document.getElementById('buyMsg').textContent = 'Hãy tự copy thông tin: ' + txt; }
+  const txt = `Order ID: ${CURRENT_ORDER.orderId}\nMã bí mật: ${CURRENT_ORDER.secret}\nGói: ${CURRENT_ORDER.productId}\nSố tiền: ${CURRENT_ORDER.amount.toLocaleString()} VND`;
+  try{ await navigator.clipboard.writeText(txt); document.getElementById('buyMsg').textContent = 'Đã copy thông tin. Gửi kèm ảnh bill qua Zalo.'; }catch(e){ document.getElementById('buyMsg').textContent = 'Hãy tự copy thông tin: ' + txt; }
 };
 </script>
 </body></html>
