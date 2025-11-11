@@ -14,17 +14,17 @@ input,textarea{width:100%;padding:10px 12px;border-radius:12px;border:1px solid 
 .helper{font-size:12px;color:#9a9aa0}
 </style></head><body>
 <main class="container">
-  <p class="helper">Quy trình: Khách bấm “Tôi đã chuyển” → gửi bill (Zalo / Form) → bạn kiểm tra → dùng trang này để cập nhật status lên Google Sheet.</p>
+  <p class="helper">Quy trình: Khách bấm “Tôi đã chuyển” → hệ thống tạo đơn trạng thái <code>pending-confirm</code> → bạn kiểm tra bill → dùng trang này để cập nhật <code>delivered</code>.</p>
   <div class="panel">
     <h3>Đơn hàng (kết nối Apps Script)</h3>
     <label>Order ID</label><input id="oid">
     <label>Mã bí mật</label><input id="osecret">
     <label>Product ID</label><input id="opid" value="wechat-create-01">
     <label>Số tiền</label><input id="oamount" type="number" value="50000">
-    <label>Trạng thái</label><input id="ostatus" placeholder="pending/delivered/rejected" value="delivered">
+    <label>Trạng thái</label><input id="ostatus" placeholder="pending-confirm/pending/delivered/rejected" value="delivered">
     <label>Ghi chú kết quả</label><input id="oresult" placeholder="Đã tạo & quét lúc ...">
     <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn" id="btnMarkDone">Đánh dấu thành công (nhập sẵn delivered)</button>
+      <button class="btn" id="btnMarkDone">Đánh dấu thành công (delivered)</button>
       <button class="btn" id="btnPush">Lưu/Update lên Google Sheet</button>
     </div>
     <p class="helper">API: https://script.google.com/macros/s/AKfycbyEIzP-IL2mYRI1wcUWKwH5m5adFYKFz4kc0F3wWNwR10nf1hM0b9XrRbOjL_HZs-Ku/exec</p>

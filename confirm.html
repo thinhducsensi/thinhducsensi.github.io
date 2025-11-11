@@ -17,7 +17,7 @@ pre{white-space:pre-wrap;background:#0f0f11;padding:10px;border-radius:12px;bord
     <a class="btn" id="form" href="#" target="_blank" rel="noopener" style="display:none">Mở form gửi bill</a>
   </div>
   <pre id="text"></pre>
-  <p><small>Sau khi bạn gửi bill, mình sẽ kiểm tra và cập nhật trạng thái đơn. Bạn có thể theo dõi ở <a id="st" href="#">order.html</a>.</small></p>
+  <p><small>Sau khi bạn gửi bill, mình sẽ kiểm tra và cập nhật trạng thái đơn. Bạn có thể theo dõi ở <a id="st" href="#">trang theo dõi</a>.</small></p>
 </div>
 <script>
 const q = new URL(location.href).searchParams;
@@ -27,9 +27,7 @@ const amt = q.get('amt')||'';
 const text = `Chào bạn, mình đã chuyển khoản.\nOrder ID: ${oid}\nMã bí mật: ${sec}\nSố tiền: ${Number(amt||0).toLocaleString()} VND\nMình đính kèm ảnh bill. Nhờ bạn hỗ trợ tạo & quét WeChat nhé!`;
 document.getElementById('text').textContent = text;
 document.getElementById('copy').onclick = ()=>navigator.clipboard.writeText(text);
-document.getElementById('st').href = 'order.html?oid=' + encodeURIComponent(oid);
+document.getElementById('st').href = 'o.html?oid=' + encodeURIComponent(oid);
 document.getElementById('info').innerHTML = `<div>Order ID: <strong>${oid}</strong></div><div>Mã bí mật: <strong>${sec}</strong></div>`;
-const FORM_URL = "";
-if(FORM_URL){ document.getElementById('form').href = FORM_URL + (FORM_URL.includes('?')?'&':'?') + 'orderId=' + encodeURIComponent(oid); document.getElementById('form').style.display='inline-flex'; }
 </script>
 </body></html>

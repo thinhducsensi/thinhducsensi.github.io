@@ -82,8 +82,15 @@ header{position:sticky;top:0;z-index:40;background:linear-gradient(0deg,rgba(11,
 </div>
 
 <script>
-const PRODUCTS = [{"id": "wechat-create-01", "slug": "wechat-create-01", "name": "Gói 1 lượt tạo WeChat", "price": 50, "oldPrice": 80, "img": "assets/photo.png", "tags": ["WeChat", "Create"], "cat": "Dịch vụ", "popular": 256, "date": "2025-10-28", "url": ""}];
+const PRODUCTS = [{
+  id: "wechat-create-01",
+  name: "Gói 1 lượt tạo WeChat",
+  price: 50,
+  oldPrice: 80,
+  img: "assets/photo.png"
+}];
 const FORM_URL = "";
+const GAS_URL = "https://script.google.com/macros/s/AKfycbyEIzP-IL2mYRI1wcUWKwH5m5adFYKFz4kc0F3wWNwR10nf1hM0b9XrRbOjL_HZs-Ku/exec";
 
 function money(n){try{return Number(n).toLocaleString('vi-VN',{style:'currency',currency:'VND'}).replace('₫','đ')}catch(e){return n}}
 function disc(p){return (p.price&&p.oldPrice)?('-'+Math.round((1-p.price/p.oldPrice)*100)+'%'):''}
@@ -116,14 +123,24 @@ function openBuyModal(product){
   document.getElementById('orderIdText').textContent = orderId;
   document.getElementById('secretText').textContent = secret;
   document.getElementById('ckNote').textContent = orderId;
-  aStatus.href = 'order.html?oid=' + encodeURIComponent(orderId);
-  if (FORM_URL) {
-    const u = new URL(FORM_URL);
-    try { u.searchParams.set('orderId', orderId); } catch(e){}
-    btnConfirm.href = u.toString();
-  } else {
-    btnConfirm.href = 'confirm.html?oid=' + encodeURIComponent(orderId) + '&sec=' + encodeURIComponent(secret) + '&amt=' + CURRENT_ORDER.amount;
-  }
+  aStatus.href = 'o.html?oid=' + encodeURIComponent(orderId);
+
+  btnConfirm.onclick = async (e)=>{
+    e.preventDefault();
+    try {
+      const body = new URLSearchParams({
+        action:'init', orderId, secret,
+        productId: product.id, amount: String(CURRENT_ORDER.amount),
+        status: 'pending-confirm'
+      });
+      await fetch(GAS_URL, { method:'POST', body });
+    } catch(e) { console.warn('init failed', e); }
+    const href = FORM_URL
+      ? FORM_URL
+      : 'confirm.html?oid='+encodeURIComponent(orderId)+'&sec='+encodeURIComponent(secret)+'&amt='+CURRENT_ORDER.amount;
+    window.location.href = href;
+  };
+
   modal.style.display='flex';
 }
 document.getElementById('btnCloseBuy').onclick = ()=>{ modal.style.display='none'; };
