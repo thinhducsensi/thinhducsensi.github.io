@@ -60,13 +60,17 @@ header{position:sticky;top:0;z-index:40;background:linear-gradient(0deg,rgba(11,
         <a class="btn" href="assets/qr.png" download="qr.png">Tải QR</a>
       </div>
     </div>
-    <div class="helper">Sau khi chuyển, <strong>gửi ảnh bill</strong> kèm <em>Order ID</em> & <em>Mã bí mật</em> tới Zalo 0964451836.</div>
+    <div class="helper">Nội dung chuyển khoản (ghi đúng): <code id="ckNote"></code>
+      <button class="btn" onclick="navigator.clipboard.writeText(document.getElementById('ckNote').textContent)">Copy</button>
+    </div>
+    <div class="helper">Sau khi chuyển, <strong>gửi ảnh bill</strong> + <em>Order ID</em> & <em>Mã bí mật</em> cho mình.</div>
     <div style="margin:8px 0"><label>Order ID: <strong id="orderIdText"></strong></label></div>
     <div style="margin:8px 0"><label>Mã bí mật: <strong id="secretText"></strong></label></div>
     <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
       <button id="btnCopy" class="btn">Copy Order ID & Mã</button>
-      <a id="btnZaloSend" class="btn primary" href="https://zalo.me/0964451836" target="_blank" rel="noopener">Gửi bill qua Zalo</a>
+      <a id="btnZaloSend" class="btn primary" href="https://zalo.me/0964451836" target="_blank" rel="noopener">Mở Zalo</a>
       <a id="btnStatus" class="btn" href="#" target="_blank" rel="noopener">Xem trạng thái</a>
+      <a id="btnConfirm" class="btn" href="#" target="_blank" rel="noopener">Tôi đã chuyển (gửi bill)</a>
       <button id="btnCloseBuy" class="btn">Đóng</button>
     </div>
     <div id="buyMsg" class="helper" style="margin-top:8px"></div>
@@ -79,6 +83,7 @@ header{position:sticky;top:0;z-index:40;background:linear-gradient(0deg,rgba(11,
 
 <script>
 const PRODUCTS = [{"id": "wechat-create-01", "slug": "wechat-create-01", "name": "Gói 1 lượt tạo WeChat", "price": 50, "oldPrice": 80, "img": "assets/photo.png", "tags": ["WeChat", "Create"], "cat": "Dịch vụ", "popular": 256, "date": "2025-10-28", "url": ""}];
+const FORM_URL = "";
 
 function money(n){try{return Number(n).toLocaleString('vi-VN',{style:'currency',currency:'VND'}).replace('₫','đ')}catch(e){return n}}
 function disc(p){return (p.price&&p.oldPrice)?('-'+Math.round((1-p.price/p.oldPrice)*100)+'%'):''}
@@ -99,6 +104,7 @@ document.querySelectorAll('[data-buy]').forEach(b=>b.onclick=()=>{
 const modal = document.getElementById('buyModal');
 const aStatus = document.getElementById('btnStatus');
 const btnCopy = document.getElementById('btnCopy');
+const btnConfirm = document.getElementById('btnConfirm');
 let CURRENT_ORDER = null;
 
 function openBuyModal(product){
@@ -109,7 +115,15 @@ function openBuyModal(product){
   document.getElementById('buyAmount').textContent = CURRENT_ORDER.amount.toLocaleString();
   document.getElementById('orderIdText').textContent = orderId;
   document.getElementById('secretText').textContent = secret;
+  document.getElementById('ckNote').textContent = orderId;
   aStatus.href = 'order.html?oid=' + encodeURIComponent(orderId);
+  if (FORM_URL) {
+    const u = new URL(FORM_URL);
+    try { u.searchParams.set('orderId', orderId); } catch(e){}
+    btnConfirm.href = u.toString();
+  } else {
+    btnConfirm.href = 'confirm.html?oid=' + encodeURIComponent(orderId) + '&sec=' + encodeURIComponent(secret) + '&amt=' + CURRENT_ORDER.amount;
+  }
   modal.style.display='flex';
 }
 document.getElementById('btnCloseBuy').onclick = ()=>{ modal.style.display='none'; };
