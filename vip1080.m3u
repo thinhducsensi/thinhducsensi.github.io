@@ -1,0 +1,37 @@
+#EXTM3U url-tvg="https://lichphatsong.site/schedule/epg.xml" m3uautoload=1
+#EXTINF:-1 group-title="🇻🇳| VTV" tvg-logo="https://cdn.jsdelivr.net/gh/thinhducsensi/thinhducsensi.github.io/logo/VTV1_logo.png",VTV1
+#EXTVLCOPT:http-user-agent=ExoPlayerLib/2.19.1
+https://livecdn.fptplay.net/live/media/vtv1/live247-hls-avc/vtv1-avc1_2800000=10001-mp4a_131600=20000.m3u8
+#EXTINF:-1 group-title="🇻🇳| VTV" tvg-logo="https://cdn.jsdelivr.net/gh/thinhducsensi/thinhducsensi.github.io/logo/VTV2_logo.png",VTV2
+#EXTVLCOPT:http-user-agent=ExoPlayerLib/2.19.1
+https://livecdn.fptplay.net/live/media/vtv2/live247-hls-avc/vtv2-avc1_2800000=10001-mp4a_131600=20000.m3u8
+#EXTINF:-1 group-title="🇻🇳| VTV" tvg-logo="https://cdn.jsdelivr.net/gh/thinhducsensi/thinhducsensi.github.io/logo/VTV3_logo.png",VTV3
+#EXTVLCOPT:http-user-agent=ExoPlayerLib/2.19.1
+https://livecdn.fptplay.net/live/media/vtv3/live247-hls-avc/vtv3-avc1_2800000=10001-mp4a_131600=20000.m3u8
+#EXTINF:-1 group-title="🇻🇳| VTV" tvg-logo="https://cdn.jsdelivr.net/gh/thinhducsensi/thinhducsensi.github.io/logo/VTV4_logo.png",VTV4
+#EXTVLCOPT:http-user-agent=ExoPlayerLib/2.19.1
+https://livecdn.fptplay.net/live/media/vtv4/live247-hls-avc/vtv4-avc1_2800000=10001-mp4a_131600=20000.m3u8
+#EXTINF:-1 group-title="🇻🇳| VTV" tvg-logo="https://cdn.jsdelivr.net/gh/thinhducsensi/thinhducsensi.github.io/logo/VTV5_logo.png",VTV5
+#EXTVLCOPT:http-user-agent=ExoPlayerLib/2.19.1
+https://livecdn.fptplay.net/live/media/vtv5/live247-hls-avc/vtv5-avc1_2800000=10001-mp4a_131600=20000.m3u8
+#EXTINF:-1 group-title="🇻🇳| VTV" tvg-logo="https://cdn.jsdelivr.net/gh/thinhducsensi/thinhducsensi.github.io/logo/VTV6_logo.png",VTV6
+#EXTVLCOPT:http-user-agent=ExoPlayerLib/2.19.1
+https://livecdn.fptplay.net/live/media/vtv6/live247-hls-avc/vtv6-avc1_2800000=10001-mp4a_131600=20000.m3u8
+#EXTINF:-1 group-title="🇻🇳| VTV" tvg-logo="https://cdn.jsdelivr.net/gh/thinhducsensi/thinhducsensi.github.io/logo/VTV7_logo.png",VTV7
+#EXTVLCOPT:http-user-agent=ExoPlayerLib/2.19.1
+https://livecdn.fptplay.net/live/media/vtv7/live247-hls-avc/vtv7-avc1_2800000=10001-mp4a_131600=20000.m3u8
+#EXTINF:-1 group-title="🇻🇳| VTV" tvg-logo="https://cdn.jsdelivr.net/gh/thinhducsensi/thinhducsensi.github.io/logo/VTV8_logo.png",VTV8
+#EXTVLCOPT:http-user-agent=ExoPlayerLib/2.19.1
+https://livecdn.fptplay.net/live/media/vtv8/live-hls-avc/vtv8-avc1_2800000=10000-mp4a_131600=20000.m3u8
+#EXTINF:-1 group-title="🇻🇳| VTV" tvg-logo="https://cdn.jsdelivr.net/gh/thinhducsensi/thinhducsensi.github.io/logo/VTV9_logo.png",VTV9
+#EXTVLCOPT:http-user-agent=ExoPlayerLib/2.19.1
+https://livecdn.fptplay.net/live/media/vtv9/live247-hls-avc/vtv9-avc1_2800000=10001-mp4a_131600=20000.m3u8
+#EXTINF:-1 group-title="🇻🇳| VTV" tvg-logo="https://cdn.jsdelivr.net/gh/thinhducsensi/thinhducsensi.github.io/logo/VTV10_logo.png",VTV10
+#EXTVLCOPT:http-user-agent=ExoPlayerLib/2.19.1
+https://livecdn.fptplay.net/live/media/vtv10/live247-hls-avc/vtv10-avc1_2800000=10001-mp4a_131600=20000.m3u8
+#EXTINF:-1 group-title="🇻🇳| VTV" tvg-logo="https://cdn.jsdelivr.net/gh/thinhducsensi/thinhducsensi.github.io/logo/VTV5tnb_logo.png",VTV5 Tây Nam Bộ
+#EXTVLCOPT:http-user-agent=ExoPlayerLib/2.19.1
+https://livecdn.fptplay.net/live/media/vtv5tnb/live-hls-avc/vtv5tnb-avc1_2800000=10000-mp4a_131600=20000.m3u8
+#EXTINF:-1 group-title="🇻🇳| VTV" tvg-logo="https://cdn.jsdelivr.net/gh/thinhducsensi/thinhducsensi.github.io/logo/VTV5taynguyen_logo.png",VTV5 Tây Nguyên
+#EXTVLCOPT:http-user-agent=ExoPlayerLib/2.19.1
+https://livecdn.fptplay.net/live/media/vtv5tn/live-hls-avc/vtv5tn-avc1_2800000=10000-mp4a_131600=20000.m3u8
