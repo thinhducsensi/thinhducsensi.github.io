@@ -1,4 +1,4 @@
-#EXTM3U url-tvg="https://lichphatsong.site/schedule/epg.xml" m3uautoload=1
+#EXTM3U url-tvg="https://lichphatsong.io.vn/epgu.xml" m3uautoload=1
 #EXTINF:-1 group-title="🇻🇳| VTV" tvg-logo="https://cdn.jsdelivr.net/gh/thinhducsensi/thinhducsensi.github.io/logo/VTV1_logo.png",VTV1
 #EXTVLCOPT:http-user-agent=ExoPlayerLib/2.19.1
 https://livecdn.fptplay.net/live/media/vtv1/live247-hls-avc/vtv1-avc1_2800000=10001-mp4a_131600=20000.m3u8
